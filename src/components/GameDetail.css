@@ -1,0 +1,51 @@
+.game-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px;
+  }
+  
+  .detail-img {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .detail-info {
+    margin-top: 24px;
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  .detail-info h2 {
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  
+  .detail-info button {
+    padding: 10px 16px;
+    margin: 8px 8px 16px 0;
+    background-color: #6a0dad;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  .detail-info textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    border-radius: 8px;
+    resize: vertical;
+  }
+  
+  .review {
+    margin-top: 12px;
+    padding: 10px;
+    background-color: #f7f7f7;
+    border-left: 4px solid #6a0dad;
+    border-radius: 6px;
+  }
+  

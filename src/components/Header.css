@@ -1,0 +1,32 @@
+.header-section {
+    padding: 2rem;
+    background-color: #121212;
+    margin-top: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  
+  .header-section h1 {
+    font-size: 1.8rem;
+    color: white;
+    margin-bottom: 1rem;
+  }
+  
+  .header-section p {
+    font-size: 1rem;
+    color: white;
+    margin-bottom: 1rem;
+  }
+  
+  .header-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .header-section li {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+    color: white;
+  }
+  

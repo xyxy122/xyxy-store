@@ -1,0 +1,150 @@
+.checkout-page {
+    padding: 20px;
+    max-width: 700px;
+    margin: auto;
+  }
+  
+  .checkout-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .checkout-item {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+  }
+  
+  .checkout-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    margin-right: 15px;
+    border-radius: 8px;
+  }
+  
+  .checkout-info {
+    flex: 1;
+  }
+  
+  .checkout-title {
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  .checkout-price {
+    color: #555;
+  }
+  
+  .checkout-total {
+    margin-top: 20px;
+    font-size: 18px;
+  }
+  
+  .checkout-button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: seagreen;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .checkout-button:hover {
+    background-color: #2e8b57;
+  }
+  
+  .checkout-message {
+    text-align: center;
+    margin-top: 100px;
+  }
+
+  .checkout-container {
+    max-width: 600px;
+    margin: 30px auto;
+    background: #121212;
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    box-shadow: 0 0 8px #000;
+  }
+  
+  .checkout-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .summary-box {
+    background: #1e1e1e;
+    padding: 16px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .checkout-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .checkout-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 12px;
+  }
+  
+  .checkout-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+  
+  .payment-methods select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+  }
+  
+  .payment-details {
+    margin-top: 20px;
+    background-color: #1e1e1e;
+    padding: 15px;
+    border-radius: 8px;
+  }
+  
+  .payment-details img.qris-img {
+    width: 120px;
+    margin-top: 10px;
+  }
+  
+  button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background-color: #4caf50;
+    color: black;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    opacity: 0.9;
+  }
+  
+  .error {
+    color: #ff5252;
+    margin-top: 8px;
+  }
+  
+  
