@@ -2,14 +2,15 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
-
-function Checkout({ cart, onCheckoutDone = () => {} }) {
+function Checkout({ cart, onCheckoutDone = () => {}, discountActive = false }) {
   const navigate = useNavigate();
   const location = useLocation();
   const [paymentMethod, setPaymentMethod] = useState(location.state?.paymentMethod || "");
   const [error, setError] = useState("");
 
-  const totalHarga = cart.reduce((total, game) => total + game.price, 0);
+  const totalAsli = cart.reduce((total, game) => total + game.price, 0);
+  const diskon = discountActive ? totalAsli * 0.1 : 0;
+  const totalHarga = totalAsli - diskon;
 
   useEffect(() => {
     if (!cart || cart.length === 0) {
@@ -27,14 +28,15 @@ function Checkout({ cart, onCheckoutDone = () => {} }) {
       id: Date.now(),
       date: new Date().toLocaleString("id-ID"),
       items: cart,
-      total: totalHarga,
+      total: Math.round(totalHarga),
       paymentMethod,
+      discountApplied: discountActive,
     };
 
     const history = JSON.parse(localStorage.getItem("orderHistory")) || [];
     localStorage.setItem("orderHistory", JSON.stringify([order, ...history]));
 
-    onCheckoutDone(); // aman meski tidak dikirim, karena default = () => {}
+    onCheckoutDone();
     toast.success("Pembayaran berhasil! Pesanan dicatat.");
     navigate("/history");
   };
@@ -56,6 +58,13 @@ function Checkout({ cart, onCheckoutDone = () => {} }) {
             </li>
           ))}
         </ul>
+
+        {discountActive && (
+          <p style={{ color: "#00c853", fontWeight: "bold", marginTop: "10px" }}>
+            🎉 Diskon 10% aktif! Hemat Rp {diskon.toLocaleString("id-ID")}
+          </p>
+        )}
+
         <h3>Total: Rp {totalHarga.toLocaleString("id-ID")}</h3>
       </div>
 

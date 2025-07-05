@@ -230,3 +230,19 @@
 .dropdown-menu li:hover {
   background-color: black;
 }
+
+.nav-links .points span {
+  background: #222;
+  padding: 5px 8px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.nav-links .exchange-link {
+  color: #00c853;
+  font-weight: 500;
+}
+
+.nav-links .exchange-link:hover {
+  color: #00e676;
+}

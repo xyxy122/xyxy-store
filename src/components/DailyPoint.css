@@ -1,0 +1,26 @@
+.daily-point-container {
+    text-align: center;
+    background: #111;
+    color: #fff;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 12px;
+    max-width: 600px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  }
+  
+  .daily-point-container button {
+    padding: 12px 24px;
+    font-size: 16px;
+    background: #00c853;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  
+  .daily-point-container button:hover {
+    background: #00b248;
+  }
+  

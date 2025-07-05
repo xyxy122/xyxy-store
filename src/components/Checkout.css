@@ -147,4 +147,13 @@
     margin-top: 8px;
   }
   
+  .discount-banner {
+    background: #00c853;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 15px;
+    font-weight: bold;
+  }
   
