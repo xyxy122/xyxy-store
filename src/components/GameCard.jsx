@@ -1,16 +1,19 @@
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
-function GameCard({ game, onAddToCart }) {
+function GameCard({ game, onAddToCart, discountActive, promoId }) {
   const [isWished, setIsWished] = useState(false);
 
-  // Cek apakah game sudah ada di wishlist saat pertama kali render
+  // Harga yang sudah di-adjust diskon daily & promo
+  let adjustedPrice = game.price;
+  if (discountActive) adjustedPrice = 10000;
+  if (game.id === promoId) adjustedPrice *= 0.8;
+
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem("wishlist")) || [];
     setIsWished(stored.some(item => item.id === game.id));
   }, [game]);
 
-  // Toggle wishlist logic
   const toggleWishlist = () => {
     const stored = JSON.parse(localStorage.getItem("wishlist")) || [];
     let updated;
@@ -27,9 +30,8 @@ function GameCard({ game, onAddToCart }) {
     setIsWished(!isWished);
   };
 
-  // Tambahkan ke keranjang
   const handleBuy = () => {
-    onAddToCart(game);
+    onAddToCart({ ...game, price: Math.round(adjustedPrice) });
     toast.success(`${game.title} ditambahkan ke keranjang!`);
   };
 
@@ -37,13 +39,25 @@ function GameCard({ game, onAddToCart }) {
     <div className="card">
       <img src={game.image} alt={game.title} className="card-img" />
       <div className="card-body">
-        <h2>{game.title}</h2>
-        <p className="price">Rp {game.price.toLocaleString("id-ID")}</p>
-        
+        <h2>
+          {game.title}
+          {game.id === promoId && <span style={{
+            backgroundColor: "red",
+            color: "white",
+            padding: "2px 6px",
+            borderRadius: "4px",
+            marginLeft: "8px",
+            fontSize: "0.8rem"
+          }}>🔥 Promo</span>}
+        </h2>
+        <p className="price">
+          Rp {Math.round(adjustedPrice).toLocaleString("id-ID")}
+        </p>
+
         <button onClick={handleBuy}>
           🛒 Beli
         </button>
-        
+
         <button
           onClick={toggleWishlist}
           style={{

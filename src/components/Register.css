@@ -1,4 +1,4 @@
-/* Login.css */
+/* Register.css */
 
 body {
     background: #0f0f1c;
@@ -6,7 +6,7 @@ body {
     color: #e0e0e0;
   }
   
-  .login-container {
+  .auth-form {
     background: #1c1c2e;
     border-radius: 15px;
     padding: 40px;
@@ -18,7 +18,7 @@ body {
     overflow: hidden;
   }
   
-  .login-container::before {
+  .auth-form::before {
     content: "";
     position: absolute;
     top: -50%;
@@ -27,29 +27,30 @@ body {
     height: 200%;
     background: linear-gradient(60deg, #ff6ec4, #7873f5, #4ade80, #facc15);
     background-size: 400% 400%;
-    animation: glowing 20s linear infinite;
+    animation: glowingRegister 20s linear infinite;
     z-index: 0;
     filter: blur(30px);
   }
   
-  .login-container h2,
-  .login-container form {
+  .auth-form h2,
+  .auth-form input,
+  .auth-form button {
     position: relative;
     z-index: 1;
   }
   
-  @keyframes glowing {
+  @keyframes glowingRegister {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
   }
   
-  .login-container h2 {
+  .auth-form h2 {
     margin-bottom: 25px;
-    color: #f2f2f2;
+    color: #ff9edb;
   }
   
-  .login-container input {
+  .auth-form input {
     width: 90%;
     padding: 12px 15px;
     margin: 10px 0;
@@ -60,47 +61,43 @@ body {
     font-size: 1em;
     outline: none;
     transition: 0.2s;
-    z-index: 1;
-    position: relative;
   }
   
-  .login-container input:focus {
+  .auth-form input:focus {
     background: #3b3b56;
-    box-shadow: 0 0 8px rgba(143, 147, 255, 0.7);
+    box-shadow: 0 0 8px rgba(255, 158, 219, 0.7);
   }
   
-  .login-container button {
+  .auth-form button {
     width: 95%;
     padding: 12px;
     margin-top: 20px;
     border: none;
     border-radius: 8px;
-    background: linear-gradient(135deg, #8f93ff, #5f61ff);
+    background: linear-gradient(135deg, #ff9edb, #ff6ec4);
     color: #fff;
     font-size: 1.1em;
     cursor: pointer;
     transition: background 0.3s, transform 0.2s;
-    z-index: 1;
-    position: relative;
   }
   
-  .login-container button:hover {
-    background: linear-gradient(135deg, #5f61ff, #8f93ff);
+  .auth-form button:hover {
+    background: linear-gradient(135deg, #ff6ec4, #ff9edb);
     transform: scale(1.05);
   }
   
-  .login-container button:active {
+  .auth-form button:active {
     transform: scale(0.98);
   }
   
   @media (max-width: 480px) {
-    .login-container {
+    .auth-form {
       padding: 25px;
       margin: 80px 20px;
     }
   
-    .login-container input,
-    .login-container button {
+    .auth-form input,
+    .auth-form button {
       font-size: 0.95em;
     }
   }

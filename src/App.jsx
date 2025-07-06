@@ -25,20 +25,10 @@ function App() {
     const stored = localStorage.getItem("wishlist");
     return stored ? JSON.parse(stored) : [];
   });
-
-  // DISKON state
   const [discountActive, setDiscountActive] = useState(
     localStorage.getItem("discountApplied") === "true"
   );
-
-  useEffect(() => {
-    const storedUser = localStorage.getItem("loggedInUser");
-    if (storedUser) setUser(JSON.parse(storedUser));
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("wishlist", JSON.stringify(wishlist));
-  }, [wishlist]);
+  const [promoId, setPromoId] = useState(null);
 
   const games = [
     {
@@ -88,7 +78,53 @@ function App() {
       image:
         "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/08/balatro-1.jpg",
     },
+    {
+      id: 8,
+      title: "Tekken 7",
+      price: 10000,
+      image: "https://media.graphassets.com/jHYvjBVjT3OnOuPQrTfs",
+    },
+    {
+      id: 9,
+      title: "Tekken 8",
+      price: 10000,
+      image:
+        "https://akinseagleseye.com/wp-content/uploads/2024/02/tekken-8-artwork.jpg",
+    },
+    {
+      id: 10,
+      title: "Among Us",
+      price: 10000,
+      image:
+        "https://static1.srcdn.com/wordpress/wp-content/uploads/2020/11/Among-Us-217-million.jpg",
+    },
   ];
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("loggedInUser");
+    if (storedUser) setUser(JSON.parse(storedUser));
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+  }, [wishlist]);
+
+  // PROMO RANDOM
+  useEffect(() => {
+    const today = new Date().toLocaleDateString("id-ID");
+    const lastPromo = JSON.parse(localStorage.getItem("dailyPromo")) || {};
+
+    if (lastPromo.date !== today) {
+      const randomId = games[Math.floor(Math.random() * games.length)].id;
+      localStorage.setItem(
+        "dailyPromo",
+        JSON.stringify({ id: randomId, date: today })
+      );
+      setPromoId(randomId);
+    } else {
+      setPromoId(lastPromo.id);
+    }
+  }, []);
 
   const handleAddToCart = (game) => setCart((prev) => [...prev, game]);
 
@@ -124,9 +160,9 @@ function App() {
                 discountActive={discountActive}
                 setDiscountActive={setDiscountActive}
               />
-
               <HomePage
                 discountActive={discountActive}
+                promoId={promoId}
                 cart={cart}
                 setCart={setCart}
                 search={search}
@@ -150,8 +186,10 @@ function App() {
           element={
             <Checkout
               cart={cart}
+              setCart={setCart}
               onCheckoutDone={handleCheckoutDone}
-              discountActive={discountActive} // tambahin ini
+              discountActive={discountActive}
+              user={user}
             />
           }
         />

@@ -1,31 +1,47 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import "./Checkout.css";
 
-function Checkout({ cart, onCheckoutDone, discountActive }) {
+function Checkout({ cart, setCart, onCheckoutDone, discountActive, user }) {
   const navigate = useNavigate();
   const [paymentMethod, setPaymentMethod] = useState("");
   const [error, setError] = useState("");
 
-  // Hitung harga per item sesuai daily point
-  const adjustedCart = cart.map(item => ({
-    ...item,
-    price: discountActive ? 10000 : 8500
-  }));
-
-  // Total awal
-  const initialTotal = adjustedCart.reduce((sum, item) => sum + item.price, 0);
-
-  // Jika QRIS dipilih, potong 10%
-  const totalHarga = paymentMethod === "QRIS"
-    ? Math.round(initialTotal * 0.8)
-    : initialTotal;
+  // Simpan cart di localStorage agar kalau refresh tetap ada
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   useEffect(() => {
-    if (!cart || cart.length === 0) {
-      navigate("/cart");
+    // load cart dari localStorage jika refresh
+    const savedCart = JSON.parse(localStorage.getItem("cart"));
+    if (savedCart) {
+      setCart(savedCart);
     }
+  }, [setCart]);
+
+  // Kalau keranjang kosong redirect
+  useEffect(() => {
+    if (!cart || cart.length === 0) navigate("/cart");
   }, [cart, navigate]);
+
+  const canGetDailyDiscount = user && discountActive;
+
+  const adjustedCart = cart.map((item) => ({
+    ...item,
+    price: canGetDailyDiscount ? 8500 : 10000,
+  }));
+
+  let initialTotal = adjustedCart.reduce((sum, item) => sum + item.price, 0);
+  const totalHarga = paymentMethod === "QRIS" ? Math.round(initialTotal * 0.9) : initialTotal;
+
+  const handleRemoveItem = (id) => {
+    const updatedCart = cart.filter((item) => item.id !== id);
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    toast.info("Item dihapus dari keranjang.");
+  };
 
   const handleFinish = () => {
     if (!paymentMethod) {
@@ -39,7 +55,7 @@ function Checkout({ cart, onCheckoutDone, discountActive }) {
       items: adjustedCart,
       total: totalHarga,
       paymentMethod,
-      discountApplied: discountActive || paymentMethod === "QRIS",
+      discountApplied: canGetDailyDiscount || paymentMethod === "QRIS",
     };
 
     const history = JSON.parse(localStorage.getItem("orderHistory")) || [];
@@ -64,6 +80,20 @@ function Checkout({ cart, onCheckoutDone, discountActive }) {
                 <strong>{game.title}</strong>
                 <p>Rp {game.price.toLocaleString("id-ID")}</p>
               </div>
+              <button
+                style={{
+                  marginLeft: "10px",
+                  backgroundColor: "red",
+                  color: "white",
+                  border: "none",
+                  padding: "4px 8px",
+                  borderRadius: "4px",
+                  cursor: "pointer"
+                }}
+                onClick={() => handleRemoveItem(game.id)}
+              >
+                ❌ Hapus
+              </button>
             </li>
           ))}
         </ul>
@@ -71,6 +101,11 @@ function Checkout({ cart, onCheckoutDone, discountActive }) {
           Total: Rp {totalHarga.toLocaleString("id-ID")}
           {paymentMethod === "QRIS" && <span> (diskon 10% QRIS)</span>}
         </h3>
+        {!user && (
+          <p className="error" style={{ color: "red", marginTop: "8px" }}>
+            Login untuk mendapatkan diskon daily point
+          </p>
+        )}
       </div>
 
       <div className="payment-methods">
@@ -86,7 +121,6 @@ function Checkout({ cart, onCheckoutDone, discountActive }) {
           <option value="Transfer Bank">Transfer Bank</option>
           <option value="E-Wallet">E-Wallet</option>
           <option value="QRIS">QRIS (Diskon 10%)</option>
-          <option value="COD">COD (Bayar di Tempat)</option>
         </select>
         {error && <p className="error">{error}</p>}
       </div>
@@ -94,24 +128,25 @@ function Checkout({ cart, onCheckoutDone, discountActive }) {
       <div className="payment-details">
         <h4>📋 Instruksi Pembayaran</h4>
         {paymentMethod === "Transfer Bank" && (
-          <p>Transfer ke: <strong>123-456-7890 (BCA)</strong></p>
+          <p>
+            Transfer ke: <strong>123-456-7890 (BCA)</strong>
+          </p>
         )}
         {paymentMethod === "E-Wallet" && (
-          <p>Kirim ke: <strong>0812-3456-7890 (OVO / DANA / GOPAY)</strong></p>
+          <p>
+            Kirim ke: <strong>0812-3456-7890 (OVO / DANA / GOPAY)</strong>
+          </p>
         )}
         {paymentMethod === "QRIS" && (
           <div>
             <p>Scan kode QR berikut untuk diskon tambahan 10%:</p>
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/3/36/QR_code_example.svg"
+              src="https://cdn.britannica.com/17/155017-050-9AC96FC8/Example-QR-code.jpg"
               alt="QRIS"
               className="qris-img"
               style={{ width: "150px", marginTop: "10px" }}
             />
           </div>
-        )}
-        {paymentMethod === "COD" && (
-          <p>Bayar saat pesanan sampai ke rumah kamu 🚚</p>
         )}
       </div>
 

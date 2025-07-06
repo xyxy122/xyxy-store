@@ -11,21 +11,28 @@ function Navbar({ search, setSearch, user, setUser }) {
 
   const handleProfileClick = () => {
     if (window.innerWidth <= 768) {
-      navigate("/profile"); // mobile langsung redirect
+      navigate("/profile");
+      setIsMobileMenuOpen(false);
     } else {
-      setShowDropdown((prev) => !prev); // desktop toggle dropdown
+      setShowDropdown((prev) => !prev);
     }
+  };
+
+  const handleNavLinkClick = () => {
+    setIsMobileMenuOpen(false);
+    setShowDropdown(false);
   };
 
   const handleLogout = () => {
     localStorage.removeItem("loggedInUser");
     setUser(null);
     navigate("/");
+    handleNavLinkClick();
   };
 
   return (
     <nav className="navbar">
-      <div className="logo-section">
+      <div className="logo-section" onClick={handleNavLinkClick}>
         <img
           src="https://cdn-icons-png.flaticon.com/512/252/252035.png"
           alt="Xyxy Logo"
@@ -44,21 +51,21 @@ function Navbar({ search, setSearch, user, setUser }) {
       </div>
 
       <ul className={`nav-links ${isMobileMenuOpen ? "open" : ""}`}>
-        <li><Link to="/">Beranda</Link></li>
-        <li><Link to="/cart">Keranjang</Link></li>
-        <li><Link to="/history">Riwayat</Link></li>
-        <li><Link to="/wishlist">Wishlist</Link></li>
+        <li><Link to="/" onClick={handleNavLinkClick}>Beranda</Link></li>
+        <li><Link to="/cart" onClick={handleNavLinkClick}>Keranjang</Link></li>
+        <li><Link to="/history" onClick={handleNavLinkClick}>Riwayat</Link></li>
+        <li><Link to="/wishlist" onClick={handleNavLinkClick}>Wishlist</Link></li>
 
         {!user ? (
           <>
-            <li><Link to="/login">Login</Link></li>
-            <li><Link to="/register">Register</Link></li>
+            <li><Link to="/login" onClick={handleNavLinkClick}>Login</Link></li>
+            <li><Link to="/register" onClick={handleNavLinkClick}>Register</Link></li>
           </>
         ) : (
           <li className="user-dropdown">
             <div onClick={handleProfileClick} className="user-avatar-wrapper">
               <img
-                src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                src={user?.avatar || "https://cdn-icons-png.flaticon.com/512/149/149071.png"}
                 alt="User"
                 className="user-avatar"
               />
@@ -66,7 +73,7 @@ function Navbar({ search, setSearch, user, setUser }) {
             </div>
             {showDropdown && (
               <ul className="dropdown-menu">
-                <li><Link to="/profile">Profil</Link></li>
+                <li><Link to="/profile" onClick={handleNavLinkClick}>Profil</Link></li>
                 <li onClick={handleLogout}>Logout</li>
               </ul>
             )}
