@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import './CartPage.css'
 
 function Checkout({ cart, onCheckoutDone = () => {}, discountActive = false }) {
   const navigate = useNavigate();

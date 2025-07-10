@@ -1,9 +1,13 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "./CartPage.css";
+import { Link, useNavigate } from "react-router-dom";
+import './CartPages.css'
 
+function CartPage({ cart, setCart }) {
+  const navigate = useNavigate();
 
-function CartPage({ cart }) {
+  const handleRemove = (id) => {
+    setCart(cart.filter(item => item.id !== id));
+  };
+
   const total = cart.reduce((sum, item) => sum + item.price, 0);
 
   return (
@@ -11,36 +15,32 @@ function CartPage({ cart }) {
       <h2>🛒 Keranjang Belanja</h2>
 
       {cart.length === 0 ? (
-        <p>Keranjang kamu kosong 😅</p>
+        <p style={{ textAlign: "center", marginTop: "20px" }}>
+          Keranjang kamu kosong. <Link to="/">Belanja sekarang!</Link>
+        </p>
       ) : (
         <>
           <ul className="cart-list">
             {cart.map((item, idx) => (
-              <li key={idx} className="cart-item">
-                <img src={item.image} alt={item.title} />
-                <div>
-                  <strong>{item.title}</strong>
+              <li className="cart-item" key={idx}>
+                <img src={item.image} alt={item.title} className="cart-img" />
+                <div className="cart-info">
+                  <h4>{item.title}</h4>
                   <p>Rp {item.price.toLocaleString("id-ID")}</p>
                 </div>
+                <button onClick={() => handleRemove(item.id)}>Hapus</button>
               </li>
             ))}
           </ul>
-          <h3>Total: Rp {total.toLocaleString("id-ID")}</h3>
 
-          {/* PROMO */}
-          <div style={{
-            backgroundColor: "#f0f9ff",
-            border: "1px solid #90caf9",
-            padding: "10px",
-            borderRadius: "6px",
-            margin: "15px 0",
-            color: "#1565c0"
-          }}>
-            🎉 Bayar pakai <strong>QRIS</strong> di checkout dan dapatkan <strong>Diskon 10%</strong>!
+          <div className="cart-summary">
+            <h3>Total: Rp {total.toLocaleString("id-ID")}</h3>
+            <button onClick={() => navigate("/checkout")}>
+              Lanjut ke Checkout
+            </button>
           </div>
-
-          <Link to="/checkout">
-            <button className="checkout-button">Lanjut ke Checkout</button>
+          <Link className="back-link" to="/">
+            ← Kembali Belanja
           </Link>
         </>
       )}

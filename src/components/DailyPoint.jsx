@@ -10,7 +10,9 @@ function DailyPoint({ user, discountActive, setDiscountActive }) {
     if (!user) return;
 
     const today = new Date().toLocaleDateString("id-ID");
-    const lastClaimData = JSON.parse(localStorage.getItem(`dailyPoint-${user.username}`));
+    const lastClaimData = JSON.parse(
+      localStorage.getItem(`dailyPoint-${user.username}`)
+    );
 
     if (lastClaimData && lastClaimData.date === today) {
       setClaimedToday(true);
@@ -29,7 +31,6 @@ function DailyPoint({ user, discountActive, setDiscountActive }) {
       const diffMs = midnight - now;
 
       if (diffMs <= 0) {
-        // sudah lewat tengah malam, auto reset
         setClaimedToday(false);
         setDiscountActive(false);
         localStorage.removeItem(`dailyPoint-${user.username}`);
@@ -41,7 +42,11 @@ function DailyPoint({ user, discountActive, setDiscountActive }) {
       const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((diffMs % (1000 * 60)) / 1000);
 
-      setTimeLeft(`${hours.toString().padStart(2,"0")}:${minutes.toString().padStart(2,"0")}:${seconds.toString().padStart(2,"0")}`);
+      setTimeLeft(
+        `${hours.toString().padStart(2, "0")}:${minutes
+          .toString()
+          .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
+      );
     };
 
     updateCountdown();
@@ -57,7 +62,10 @@ function DailyPoint({ user, discountActive, setDiscountActive }) {
     }
 
     const today = new Date().toLocaleDateString("id-ID");
-    localStorage.setItem(`dailyPoint-${user.username}`, JSON.stringify({ date: today }));
+    localStorage.setItem(
+      `dailyPoint-${user.username}`,
+      JSON.stringify({ date: today })
+    );
     setClaimedToday(true);
     setDiscountActive(true);
     toast.success("Diskon harian berhasil diklaim. Berlaku hari ini!");
@@ -70,10 +78,14 @@ function DailyPoint({ user, discountActive, setDiscountActive }) {
       ) : claimedToday ? (
         <>
           <p>🎉 Diskon hari ini sudah kamu klaim.</p>
-          <p>⏳ Kamu bisa klaim lagi dalam <strong>{timeLeft}</strong></p>
+          <p>
+            ⏳ Kamu bisa klaim lagi dalam <strong>{timeLeft}</strong>
+          </p>
         </>
       ) : (
-        <button onClick={handleClaim}>🎁 Klaim Diskon Harian (Rp 5.000/item)</button>
+        <button onClick={handleClaim}>
+          🎁 Klaim Diskon Harian (Rp 5.000/item)
+        </button>
       )}
     </div>
   );

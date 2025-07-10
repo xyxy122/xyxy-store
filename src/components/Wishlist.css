@@ -1,79 +1,89 @@
 .wishlist {
-    padding: 24px;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .wishlist h2 {
-    font-size: 2rem;
-    margin-bottom: 24px;
-    text-align: center;
-    color: #4b0082; /* ungu gelap */
-  }
-  
-  .wishlist ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
+  padding: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #e0e0e0;
+}
+
+.wishlist h2 {
+  font-size: 2rem;
+  margin-bottom: 24px;
+  text-align: center;
+  color: #c084fc; /* ungu neon */
+}
+
+.wishlist ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.wishlist li {
+  display: flex;
+  align-items: center;
+  background-color: #1e1e1e; /* dark */
+  padding: 16px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  gap: 18px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.wishlist li:hover {
+  background-color: #2c2c2c;
+  transform: translateY(-4px);
+}
+
+.wishlist img {
+  width: 120px;
+  aspect-ratio: 1/1;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.wishlist div {
+  flex: 1;
+}
+
+.wishlist p {
+  margin: 6px 0;
+  font-size: 1rem;
+  color: #ccc;
+}
+
+.wishlist button {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  background: #a855f7; /* ungu neon */
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.2s;
+  margin-top: 8px;
+}
+
+.wishlist button:hover {
+  background: #9333ea;
+  transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
   .wishlist li {
-    display: flex;
-    align-items: center;
-    background-color: #f3f0ff; /* ungu sangat muda */
-    padding: 16px;
-    margin-bottom: 20px;
-    border-radius: 14px;
-    gap: 20px;
-    box-shadow: 0 2px 8px rgba(75, 0, 130, 0.1);
+    flex-direction: column;
+    align-items: flex-start;
   }
-  
+
   .wishlist img {
-    width: 120px;
-    height: auto;
-    border-radius: 10px;
-    object-fit: cover;
+    width: 100%;
+    margin-bottom: 12px;
   }
-  
+
   .wishlist div {
-    flex: 1;
+    width: 100%;
   }
-  
-  .wishlist p {
-    margin: 6px 0;
-    font-size: 1rem;
-    color: #333;
-  }
-  
-  .wishlist button {
-    padding: 8px 16px;
-    font-size: 0.9rem;
-    background-color: #9b59b6; /* ungu terang */
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    margin-top: 10px;
-  }
-  
-  .wishlist button:hover {
-    background-color: #8e44ad;
-  }
-  
-  @media screen and (max-width: 600px) {
-    .wishlist li {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .wishlist img {
-      width: 100%;
-      margin-bottom: 12px;
-    }
-  
-    .wishlist div {
-      width: 100%;
-    }
-  }
-  
+}

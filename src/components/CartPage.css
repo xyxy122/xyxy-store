@@ -1,7 +1,6 @@
-/* Container utama keranjang */
 .cart-container {
   padding: 24px;
-  background-color: #1a1a1a;
+  background: #1a1a1a;
   color: #f1f1f1;
   border-radius: 12px;
   max-width: 800px;
@@ -9,90 +8,100 @@
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
 }
 
-/* List item */
+.cart-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #fda500;
+}
+
 .cart-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-/* Setiap item di cart */
 .cart-item {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
-  gap: 16px;
-  background-color: #242424;
-  padding: 12px;
+  background: #2b2b2b;
+  margin-bottom: 16px;
   border-radius: 10px;
-  transition: background 0.3s ease;
+  overflow: hidden;
+  transition: background 0.3s;
 }
 
 .cart-item:hover {
-  background-color: #2e2e2e;
+  background: #393939;
 }
 
-/* Gambar produk */
 .cart-img {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  aspect-ratio: 16/9;
   object-fit: cover;
-  border-radius: 8px;
-  border: 1px solid #333;
+  flex-shrink: 0;
 }
 
-/* Info produk */
 .cart-info {
   flex: 1;
+  padding: 10px 15px;
 }
 
 .cart-info h4 {
-  margin: 0 0 4px;
+  margin: 0;
   font-size: 1.05rem;
   color: #fff;
 }
 
 .cart-info p {
-  margin: 0;
-  font-size: 0.95rem;
-  color: #ccc;
+  margin: 4px 0 0;
+  color: #4ade80;
 }
 
-/* Ringkasan dan tombol */
+.cart-item button {
+  background: #d32f2f;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  border-radius: 0 8px 8px 0;
+}
+
+.cart-item button:hover {
+  background: #b71c1c;
+}
+
 .cart-summary {
-  margin-top: 24px;
-  padding-top: 16px;
-  border-top: 1px solid #333;
   text-align: right;
+  margin-top: 20px;
 }
 
 .cart-summary h3 {
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   color: #4ade80;
 }
 
 .cart-summary button {
   padding: 12px 24px;
-  background-color: #2563eb;
+  background: #2563eb;
   color: white;
   border: none;
   border-radius: 8px;
+  font-weight: bold;
   cursor: pointer;
-  font-weight: 600;
-  transition: background 0.2s ease;
+  transition: background 0.3s;
 }
 
 .cart-summary button:hover {
-  background-color: #1d4ed8;
+  background: #1d4ed8;
 }
 
-/* Link kembali ke beranda */
 .back-link {
   display: inline-block;
   margin-top: 20px;
   color: #60a5fa;
   text-decoration: none;
-  font-size: 0.95rem;
 }
 
 .back-link:hover {
@@ -108,7 +117,7 @@
 
   .cart-img {
     width: 100%;
-    height: auto;
+    aspect-ratio: 16/9;
   }
 
   .cart-summary {
@@ -118,14 +127,4 @@
   .cart-summary button {
     width: 100%;
   }
-}
-
-.discount-banner {
-  background: #00c853;
-  color: white;
-  padding: 10px;
-  border-radius: 8px;
-  text-align: center;
-  margin-bottom: 15px;
-  font-weight: bold;
 }

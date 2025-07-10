@@ -1,7 +1,7 @@
 // src/components/TransactionDetail.jsx
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-
+import "./TransactionDetail.css";
 
 function TransactionDetail() {
   const { id } = useParams();
@@ -21,8 +21,12 @@ function TransactionDetail() {
   return (
     <div className="transaction-detail">
       <h2>🧾 Detail Transaksi</h2>
-      <p><strong>ID:</strong> {order.id}</p>
-      <p><strong>Tanggal:</strong> {order.date}</p>
+      <p>
+        <strong>ID:</strong> {order.id}
+      </p>
+      <p>
+        <strong>Tanggal:</strong> {order.date}
+      </p>
       <ul className="history-items">
         {order.items.map((item, i) => (
           <li key={i} className="history-item">
