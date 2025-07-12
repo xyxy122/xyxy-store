@@ -1,21 +1,30 @@
+body {
+  background: #121212;
+  font-family: 'Poppins', sans-serif;
+  color: #f1f1f1;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container utama */
 .cart-container {
   max-width: 800px;
-  margin: 30px auto;
-  padding: 24px;
-  background: #121212; /* dark */
-  border-radius: 14px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.6);
-  color: #e0e0e0;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 80px auto 30px;
+  padding: 25px;
+  background: #1e1e1e;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+  animation: fadeIn 1s ease;
 }
 
+/* Title */
 .cart-container h2 {
   text-align: center;
-  margin-bottom: 24px;
-  font-size: 26px;
-  color: #60a5fa; /* biru neon */
+  margin-bottom: 25px;
+  color: #ff9ff3;
 }
 
+/* List cart item */
 .cart-list {
   list-style: none;
   padding: 0;
@@ -25,61 +34,115 @@
 .cart-item {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 16px 0;
-  border-bottom: 1px solid #2c2c2c;
-  transition: background 0.3s ease;
+  gap: 15px;
+  background: #2a2a2a;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  transition: 0.3s;
 }
 
 .cart-item:hover {
-  background: #1e1e1e;
-  border-radius: 8px;
+  transform: translateY(-3px);
 }
 
-.cart-item img {
-  width: 80px;
-  aspect-ratio: 1/1;
+/* Gambar item */
+.cart-img {
+  width: 70px;
+  height: 70px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 10px;
 }
 
-.cart-item strong {
-  font-size: 17px;
-  color: #f3f3f3;
+/* Info item */
+.cart-info h4 {
+  margin: 0 0 5px 0;
+  font-size: 1.1rem;
 }
 
-.cart-item p {
-  margin: 4px 0 0;
-  color: #aaa;
+.cart-info p {
+  margin: 0;
+  color: #ccc;
 }
 
-.checkout-button {
-  display: block;
-  width: 100%;
-  background: #4ade80; /* hijau neon */
-  color: #121212;
-  font-size: 17px;
-  font-weight: bold;
-  padding: 14px;
-  margin-top: 30px;
+/* Tombol hapus */
+.cart-item button {
+  background: #ff6b81;
+  color: #fff;
   border: none;
   border-radius: 10px;
+  padding: 8px 12px;
   cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
+  margin-left: auto;
+  transition: 0.3s;
 }
 
-.checkout-button:hover {
-  background: #22c55e;
-  transform: scale(1.02);
+.cart-item button:hover {
+  background: #ff4757;
+  box-shadow: 0 0 12px #ff4757;
 }
 
-/* Promo box style */
-.cart-container .promo-box {
-  background: #1e3a8a;
-  border: 1px solid #60a5fa;
-  padding: 12px;
-  border-radius: 8px;
-  margin: 20px 0;
-  color: #c7d2fe;
-  font-size: 15px;
+/* Summary total */
+.cart-summary {
+  margin-top: 25px;
+  text-align: center;
+}
+
+.cart-summary h3 {
+  margin-bottom: 15px;
+  color: #48dbfb;
+}
+
+/* Tombol checkout */
+.cart-summary button {
+  background: #48dbfb;
+  color: #121212;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 25px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cart-summary button:hover {
+  background: #0abde3;
+  box-shadow: 0 0 15px #0abde3;
+  transform: translateY(-2px);
+}
+
+/* Link kembali belanja */
+.back-link {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  color: #ff9ff3;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.back-link:hover {
+  color: #f368e0;
+  text-decoration: underline;
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .cart-container {
+    padding: 20px;
+  }
+  .cart-img {
+    width: 55px;
+    height: 55px;
+  }
+  .cart-item button {
+    padding: 6px 10px;
+    font-size: 0.9rem;
+  }
 }

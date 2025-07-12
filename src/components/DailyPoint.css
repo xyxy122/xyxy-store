@@ -1,27 +1,68 @@
+body {
+  background: #121212;
+  color: #f1f1f1;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container daily point */
 .daily-point-container {
-    text-align: center;
-    background: #111;
-    color: #fff;
+  max-width: 500px;
+  margin: 100px auto 30px; /* margin-top gede biar turun ke bawah */
+  padding: 25px;
+  background: #1e1e1e;
+  color: #f1f1f1;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+  text-align: center;
+  animation: fadeIn 1s ease;
+}
+
+/* Teks */
+.daily-point-container p {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+/* Tombol klaim */
+.daily-point-container button {
+  background: #48dbfb;
+  color: #121212;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 1rem;
+}
+
+.daily-point-container button:hover {
+  background: #0abde3;
+  box-shadow: 0 0 15px #0abde3;
+  transform: translateY(-2px);
+}
+
+/* Timer highlight */
+.daily-point-container strong {
+  color: #ff9ff3;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .daily-point-container {
     padding: 20px;
-    margin: 25px auto;
-    margin-top: 80px;
-    border-radius: 12px;
-    max-width: 600px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
   }
-  
+  .daily-point-container p,
   .daily-point-container button {
-    padding: 12px 24px;
-    font-size: 16px;
-    background: #00c853;
-    border: none;
-    color: white;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.2s;
+    font-size: 0.95rem;
   }
-  
-  .daily-point-container button:hover {
-    background: #00b248;
-  }
-  
+}
